@@ -19,8 +19,11 @@ class Pop():
 
     def run(self):
         if not self.process:
-            self.process = sb.Popen(self._makeargs(), stdout=self.stdout_type)
-            self.content = self.process.communicate()[0]
+            cmdargs = [str(a) for a in self._makeargs()]
+            self.process = sb.Popen(cmdargs, stdout=self.stdout_type)
+            # args = ('pdftotext', '-layout', '-f', 1, '-l', 1, 'examples/docs/hellobye.pdf', '-')
+            # self.process = sb.Popen(args, stdout=self.stdout_type)
+            self.content = self.process.communicate()[0].strip()
             self.text = self.content.decode('utf-8')
         return self.process
 

@@ -23,8 +23,9 @@ def test_default_attrs():
 
 
 def test_params():
-    pt = Pdftotext('nuff')
-    assert pt.params == ('-layout', '-f 1', '-l 1', 'nuff', '-',)
+    pt = Pdftotext('nuff.pdf')
+    # note that params are in their nonstring form
+    assert pt.params == ('-layout', '-f', 1, '-l', 1, 'nuff.pdf', '-',)
 
 
 def test_pdftotext_command():

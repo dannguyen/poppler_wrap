@@ -1,5 +1,4 @@
 import pytest
-import sys, os
 from poppler_wrap import pop
 
 def test_hello():

@@ -18,13 +18,13 @@ class Pdftotext(Pop):
         _parms = (
                     self.layout,
                     # add first and last page arguments
-                    '-f {}'.format(page_number),
-                    '-l {}'.format(page_number),
-                    # then infile
-                    self.infile,
-                    # and stdout
-                    '-',
-                )
+                   '-f',
+                   self.page_number,
+                   '-l',
+                   self.page_number,
+                   self.infile,
+                   '-'
+                   )
         super().__init__(__name, *_parms)
 
 
