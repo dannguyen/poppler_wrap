@@ -5,16 +5,31 @@
 from pathlib import Path
 from poppler_wrap.pop import Pop
 
-SAMPLE_PATH = Path('examples', 'pdfs', 'facebook-ira-ad.pdf')
 
 class Pdftotext(Pop):
-    def __init__(self, infile=SAMPLE_PATH,
-                       layout_type='-layout',
-#                        output_path='-', stdout_type=sb.PIPE
-                        ):
+    def __init__(self, infile,
+                       page_number=1,
+                       layout='-layout',):
+
         __name = 'pdftotext'
         self.infile = infile
-        self.layout_type = layout_type
-        super().__init__(__name, self.layout_type, infile)
+        self.page_number = page_number
+        self.layout = layout
+        _parms = (
+                    self.layout,
+                    # add first and last page arguments
+                    '-f {}'.format(page_number),
+                    '-l {}'.format(page_number),
+                    # then infile
+                    self.infile,
+                    # and stdout
+                    '-',
+                )
+        super().__init__(__name, *_parms)
 
 
+    def to_dict(self):
+        d = super().to_dict()
+        d['page_number'] = self.page_number
+        d['hi'] = 'bye'
+        return d
